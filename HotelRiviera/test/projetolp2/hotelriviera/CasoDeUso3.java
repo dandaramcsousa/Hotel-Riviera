@@ -20,6 +20,7 @@
 
 package projetolp2.hotelriviera;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -42,8 +43,12 @@ public class CasoDeUso3 {
 	private final boolean NAO_TEM_CAMA_EXTRA = false;
 	private final boolean TEM_CAMA_EXTRA = true;
 	private static ListaQuartosHotel listaQuartos;
-	Quarto luxoSimples, luxoDuplo, luxoTriplo, presidencial, executivoSimples, executivoDuplo, executivoTriplo;
+	private static ListaContratos contratosHotel;
+	private Quarto luxoSimples, luxoDuplo, luxoTriplo, presidencial, executivoSimples, executivoDuplo, executivoTriplo;
+	private Time horaBabysitter;
+	private GregorianCalendar dataBabysitter;
 	
+	@SuppressWarnings("deprecation")
 	@Before
 	public void CriarContratos() throws Exception{
 		hospede1 = new Hospede ("Jorge Ferreira Amaral",
@@ -67,7 +72,10 @@ public class CasoDeUso3 {
 		contrato2 = new Contrato(hospede2, "2314-5455-3198-1094", 12, quarto2);
 		quarto2.setNumeroPessoas(3);
 		
-		Babysitter babysitter1 = new Babysitter(false, 5);
+		dataBabysitter = new GregorianCalendar(2015, 10, 26);
+		horaBabysitter = new Time (20,0,0);
+		
+		Babysitter babysitter1 = new Babysitter(false, 5, dataBabysitter, horaBabysitter);
 		AluguelCarro aluguel1 = new AluguelCarro(new CarroExecutivo(false, true));
 		contrato1.adicionaAdicionais(babysitter1);
 		contrato2.adicionaAdicionais(aluguel1);
@@ -102,8 +110,32 @@ public class CasoDeUso3 {
 			new Contrato(hospede2, "5555555 7 5", -8, quartoDeTestes);
 		} catch (NumeroNegativoException e){
 			Assert.assertEquals("O numero de dias nao pode ser negativo.",e.getMessage());
-		}	
+		}
 	}
 	
+	@Test
+	public void testaListaContratos () throws Exception {
+		contratosHotel = new ListaContratos();
+		
+		try {
+			contratosHotel.adicionaContrato(null);
+			Assert.fail("Deve lançar exceção, o contrato não pode ser 'null'.");
+		} catch (Exception e) {
+			Assert.assertEquals("O contrato não pode ser do tipo 'null'.", e.getMessage());
+		}
+		
+		contratosHotel.adicionaContrato(contrato1);
+		Assert.assertEquals(1, contrato1.getCodigoContrato());
+		contratosHotel.adicionaContrato(contrato2);
+		Assert.assertEquals(2, ListaContratos.getContratosAbertos().size(), 0.01);
+		Assert.assertTrue(contratosHotel.removeContrato(contrato1));
+		Assert.assertEquals(1, ListaContratos.getContratosAbertos().size(), 0.01);
+		Assert.assertTrue(contratosHotel.removeContrato(contrato2));
+		Assert.assertFalse(contratosHotel.removeContrato(contrato1));
+	}
+	
+	@Test
+	public void testaTarifacao () {
+		
+	}
 }
-

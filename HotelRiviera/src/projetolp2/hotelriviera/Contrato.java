@@ -8,7 +8,17 @@ public class Contrato {
 	private int numeroDias;
 	private Quarto quarto;
 	private ArrayList<Adicional> adicionais;
+	private int codigoContrato;
+	private boolean contratoAberto = true;
 	
+	public boolean isContratoAberto() {
+		return contratoAberto;
+	}
+
+	public void setContratoFechado() {
+		this.contratoAberto = false;
+	}
+
 	public Contrato (Hospede hospede, String numeroCartao, int numeroDias, Quarto quarto) throws Exception {
 		if (hospede == null || quarto == null || numeroCartao == null) {
 			throw new ObjetoInvalidoException("O objeto passado eh nulo. ");
@@ -80,5 +90,23 @@ public class Contrato {
 
 	public ArrayList<Adicional> getAdicionais() {
 		return adicionais;
+	}
+	
+	public int setCodigoContrato (int codigoContrato) {
+		this.codigoContrato = codigoContrato;
+		return this.codigoContrato;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Contrato)){
+			return false;
+		}
+		Contrato contrato = (Contrato) obj;
+		return hospede.equals(contrato.getHospede()) && numeroCartao.equals(contrato.getNumeroCartao());
+	}
+
+	public int getCodigoContrato() {
+		return codigoContrato;
 	}
 }

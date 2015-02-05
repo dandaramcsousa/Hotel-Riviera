@@ -10,10 +10,12 @@ public class Babysitter implements Adicional {
 	private final static double SERVICO_HORA_DOBRADA = SERVICO_HORA_NORMAL * 2;
 	private GregorianCalendar diaServico;
 	private Time horaInicio;
+	GregorianCalendar dataAtual = new GregorianCalendar();
 	
-	public Babysitter (boolean horaDobrada, int horasServico) throws Exception {
+	public Babysitter (boolean horaDobrada, int horasServico, GregorianCalendar diaServico, Time horaInicio) throws Exception {
 		if (horasServico < 0) throw new NumeroNegativoException("O numero de horas nao pode ser negativo.");
 		else if(horasServico > 12) throw new Exception("O numero de horas nao pode ser acima de 12.");
+		if (diaServico.before(dataAtual)) throw new Exception("Data inválida.");
 		this.diaServico = diaServico;
 		this.horaInicio = horaInicio; 
 		this.horasServico = horasServico;

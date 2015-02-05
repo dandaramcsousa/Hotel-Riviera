@@ -20,6 +20,7 @@
 
 package projetolp2.hotelriviera;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -37,8 +38,11 @@ public class CasoDeUso2 {
 	private final boolean TEM_CAMA_EXTRA = true;
 	private Quarto quarto1;
 	private Quarto quarto2;
+	private GregorianCalendar dataBabysitter;
+	private Time horaBabysitter;
 	private static ListaQuartosHotel listaQuartos;
 	
+	@SuppressWarnings("deprecation")
 	@Before
 	public void CriarContratos() throws Exception{
 		hospede1 = new Hospede ("Jorge Ferreira Amaral",
@@ -61,6 +65,8 @@ public class CasoDeUso2 {
 		quarto1.setNumeroPessoas(2);
 		contrato2 = new Contrato(hospede2, "2314-5455-3198-1094", 12, quarto2);
 		quarto2.setNumeroPessoas(3);
+		dataBabysitter = new GregorianCalendar(2015, 10, 26);
+		horaBabysitter = new Time (20,0,0);
 	}
 	
 	@Test
@@ -107,24 +113,33 @@ public class CasoDeUso2 {
 	
 	@Test
 	public void TestarBabysitter() throws Exception {
+		GregorianCalendar dataInvalida = new GregorianCalendar(2014, 2, 20);
+		
 		try {
-			new Babysitter(false, 15);
+			new Babysitter(false, 6, dataInvalida, horaBabysitter);
+			Assert.fail("A data fornecida já passou, é impossível agendar a babysitter para o passado.");
+		} catch (Exception e) {
+			Assert.assertEquals("Data inválida.", e.getMessage());
+		}
+		
+		try {
+			new Babysitter(false, 15, dataBabysitter, horaBabysitter);
 			Assert.fail("O numero de horas nao pode exceder 12.");
 		} catch (Exception e) {
 			Assert.assertEquals("O numero de horas nao pode ser acima de 12.", e.getMessage());
 		}
 		try {
-			new Babysitter(false, -1);
+			new Babysitter(false, -1, dataBabysitter, horaBabysitter);
 			Assert.fail("O numero de horas nao pode ser negativo.");
 		} catch (NumeroNegativoException e) {
 			Assert.assertEquals("O numero de horas nao pode ser negativo.", e.getMessage());
 		}
 		
-		Babysitter babysitter1 = new Babysitter(false, 5);
+		Babysitter babysitter1 = new Babysitter(false, 5, dataBabysitter, horaBabysitter);
 		contrato1.adicionaAdicionais(babysitter1);
 		Assert.assertEquals(contrato1.getAdicionais().get(0).getValorServico(), 125.00, 0.01);
 		
-		Babysitter babysitter2 = new Babysitter(true, 5);
+		Babysitter babysitter2 = new Babysitter(true, 5, dataBabysitter, horaBabysitter);
 		contrato2.adicionaAdicionais(babysitter2);
 		Assert.assertEquals(contrato2.getAdicionais().get(0).getValorServico(), 250.00, 0.01);
 	}
@@ -150,7 +165,7 @@ public class CasoDeUso2 {
 	public void testaPesquisarServicos() throws Exception{
 		AluguelCarro aluguel1 = new AluguelCarro(new CarroExecutivo(false, true));
 		contrato1.adicionaAdicionais(aluguel1);
-		Babysitter babysitter1 = new Babysitter(false, 5);
+		Babysitter babysitter1 = new Babysitter(false, 5, dataBabysitter, horaBabysitter);
 		contrato1.adicionaAdicionais(babysitter1);
 		Refeicoes refeicoes1 = new Refeicoes();
 		refeicoes1.acrescentaRefeicao(64.70);
@@ -189,7 +204,7 @@ public class CasoDeUso2 {
 	public void testaRemoverServicos() throws Exception{
 		AluguelCarro aluguel1 = new AluguelCarro(new CarroExecutivo(false, true));
 		contrato1.adicionaAdicionais(aluguel1);
-		Babysitter babysitter1 = new Babysitter(false, 5);
+		Babysitter babysitter1 = new Babysitter(false, 5, dataBabysitter, horaBabysitter);
 		contrato1.adicionaAdicionais(babysitter1);
 		Refeicoes refeicoes1 = new Refeicoes();
 		refeicoes1.acrescentaRefeicao(64.70);
