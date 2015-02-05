@@ -66,4 +66,18 @@ public class Hospede {
 			throw new Exception("Os dados fornecidos não podem conter uma String Vazia.");
 		}
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Hospede)){
+			return false;
+		}
+		Hospede hospede = (Hospede) obj;
+		return nomeHospede.equals(hospede.getNomeHospede()) && CPF.equals(hospede.getCPF());
+	}
+	
+	@Override
+	public String toString () {
+		return "Nome do hóspede: " + nomeHospede + " - CPF: " + CPF;
+	}
 }
