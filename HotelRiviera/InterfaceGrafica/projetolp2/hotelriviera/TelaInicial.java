@@ -5,13 +5,18 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class TelaInicial extends JFrame {
@@ -47,7 +52,7 @@ public class TelaInicial extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(Color.WHITE);
-		setBounds(100, 100, 1204, 766);
+		setBounds(100, 100, 1204, 772);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setToolTipText("Oi");
@@ -60,6 +65,7 @@ public class TelaInicial extends JFrame {
 		botao_checkin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaCheckin.main(null);
+				setVisible(false);
 			}
 		});
 		botao_checkin.setIcon(new ImageIcon("media/botao_checkin.png"));
@@ -71,6 +77,7 @@ public class TelaInicial extends JFrame {
 		botao_servicos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaServicos.main(null);
+				setVisible(false);
 			}
 		});
 		botao_servicos.setIcon(new ImageIcon("media/botao_servicos.png"));
@@ -82,6 +89,7 @@ public class TelaInicial extends JFrame {
 		botao_consulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaConsulta.main(null);
+				setVisible(false);
 			}
 		});
 		botao_consulta.setIcon(new ImageIcon("media/botao_consulta.png"));
@@ -94,6 +102,7 @@ public class TelaInicial extends JFrame {
 		botao_checkout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaCheckout.main(null);
+				setVisible(false);
 			}
 		});
 		botao_checkout.setIcon(new ImageIcon("media/botao_checkout.png"));

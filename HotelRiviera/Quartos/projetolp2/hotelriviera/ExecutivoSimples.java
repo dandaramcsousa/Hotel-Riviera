@@ -10,6 +10,6 @@ public class ExecutivoSimples extends Executivo {
 	
 	@Override
 	public String toString () {
-		return super.toString() + "\nTipo de quarto: Executivo Simples";
+		return super.toString() + "\n Tipo de quarto: Executivo Simples";
 	}
 }

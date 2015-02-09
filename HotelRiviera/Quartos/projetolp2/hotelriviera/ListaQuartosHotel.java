@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 public class ListaQuartosHotel {
 	private ArrayList<Quarto> quartosHotel;
-	private final boolean QUARTO_OCUPADO = true;
 	private ArrayList<Quarto> quartosDisponiveis;
 	
 	public ListaQuartosHotel() throws Exception {
@@ -68,10 +67,10 @@ public class ListaQuartosHotel {
 		return quartosDisponiveis;
 	}
 
-	public boolean setQuarto (boolean statusQuarto, int codigoQuarto) {
+	public boolean SetQuartoLivre (int codigoQuarto) {
 		Quarto quarto = getQuarto(codigoQuarto);
 		if (quarto == null) return false;
-		quarto.setQuartoOcupado(statusQuarto);
+		quarto.livre();
 		return true;
 	}
 	
@@ -86,7 +85,7 @@ public class ListaQuartosHotel {
 		for (Quarto a: quartosHotel) {
 			if (codigoQuarto == a.getCodigoQuarto() && a.getQuartoOcupado() == false) {
 				a.setNumeroPessoas(numeroPessoas);
-				a.setQuartoOcupado(QUARTO_OCUPADO);
+				a.ocupado();
 				return true;
 			}
 		}

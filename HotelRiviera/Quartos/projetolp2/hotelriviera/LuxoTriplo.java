@@ -11,7 +11,7 @@ public class LuxoTriplo extends Luxo {
 	
 	@Override
 	public String toString () {
-		return super.toString() + "\nTipo de quarto: Luxo Triplo";
+		return super.toString() + "\n Tipo de quarto: Luxo Triplo";
 	}
 
 }

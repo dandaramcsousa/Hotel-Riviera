@@ -37,8 +37,12 @@ public abstract class Quarto implements ServicosHotel {
 		return quartoOcupado;
 	}
 
-	public void setQuartoOcupado(boolean statusQuarto) {
-		this.quartoOcupado = statusQuarto;
+	public void ocupado() {
+		this.quartoOcupado = true;
+	}
+	
+	public void livre() {
+		this.quartoOcupado = false;
 	}
 
 	public int getCodigoQuarto() {
@@ -63,8 +67,8 @@ public abstract class Quarto implements ServicosHotel {
 	
 	@Override
 	public String toString () {
-		return "O código do quarto é: " + getCodigoQuarto() + "\nO quarto se encontra " + getQuartoOcupado()
-				+ " e o valor da diária é " + getValorDiaria();
+		return "Código de identificação: " + getCodigoQuarto() + "\n - O quarto se encontra " + getQuartoOcupado()
+				+ " e o valor da diária é " + getValorDiaria() + " - " ;
 	}
 
 }
