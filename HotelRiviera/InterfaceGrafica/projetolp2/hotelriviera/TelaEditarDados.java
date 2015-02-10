@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JButton;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -173,6 +172,5 @@ public class TelaEditarDados extends JFrame {
 		botaoAtualizar = new JButton("Atualizar dados");
 		botaoAtualizar.setBounds(147, 334, 260, 47);
 		panel.add(botaoAtualizar);
-		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panel}));
 	}
 }

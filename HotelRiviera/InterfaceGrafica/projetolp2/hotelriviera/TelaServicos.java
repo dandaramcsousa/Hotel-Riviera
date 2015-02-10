@@ -52,7 +52,7 @@ public class TelaServicos extends JFrame {
 	 */
 	public TelaServicos() {
 		setResizable(false);
-		setTitle("Hotel Riviera - Sistema de Manuten\u00E7\u00E3o de Clientes e Servi\u00E7os - Servi�os");
+		setTitle("Hotel Riviera - Sistema de Manutencao de Clientes e Servicos - Servicos");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Pedro Paulo\\workspace\\hotelriviera\\Media\\icone_janela.png"));
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,9 +67,9 @@ public class TelaServicos extends JFrame {
 		
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBackground(new Color(188, 143, 143));
-		btnNewButton.setIcon(new ImageIcon("/home/pedropfo/Música/HotelRiviera/media/botao_voltaraoinicio.png"));
+		btnNewButton.setIcon(new ImageIcon("media/botao_voltaraoinicio.png"));
 		btnNewButton.setForeground(new Color(165, 42, 42));
-		btnNewButton.setSelectedIcon(new ImageIcon("C:\\Users\\Pedro Paulo\\workspace\\hotelriviera\\Media\\botao_voltaraoinicio.png"));
+		btnNewButton.setSelectedIcon(new ImageIcon("Media/botao_voltaraoinicio.png"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaInicial.main(null);
@@ -77,7 +77,7 @@ public class TelaServicos extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("Contratar servi\u00E7o");
+		JButton btnNewButton_1 = new JButton("Contratar servico");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1.setBounds(927, 271, 178, 87);
@@ -157,7 +157,7 @@ public class TelaServicos extends JFrame {
 		panel_2.add(textField_2);
 		textField_2.setColumns(10);
 		
-		JLabel lblValorDaRefeio = new JLabel("Valor da refei\u00E7\u00E3o:");
+		JLabel lblValorDaRefeio = new JLabel("Valor da refeicao:");
 		lblValorDaRefeio.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblValorDaRefeio.setBounds(10, 21, 157, 22);
 		panel_2.add(lblValorDaRefeio);
@@ -187,13 +187,13 @@ public class TelaServicos extends JFrame {
 		rdbtnHoraDobrada.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbtnHoraDobrada.setBackground(Color.WHITE);
 		
-		JButton btnContratarServio = new JButton("Contratar servi\u00E7o");
+		JButton btnContratarServio = new JButton("Contratar servico");
 		btnContratarServio.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnContratarServio.setBackground(Color.WHITE);
 		btnContratarServio.setBounds(927, 400, 178, 87);
 		contentPane.add(btnContratarServio);
 		
-		JButton btnContratarServio_1 = new JButton("Contratar servi\u00E7o");
+		JButton btnContratarServio_1 = new JButton("Contratar servico");
 		btnContratarServio_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnContratarServio_1.setBackground(Color.WHITE);
 		btnContratarServio_1.setBounds(927, 524, 178, 87);
@@ -201,7 +201,7 @@ public class TelaServicos extends JFrame {
 		
 		JLabel background = new JLabel("Hotel Riviera");
 		background.setBounds(0, 0, 1241, 739);
-		background.setIcon(new ImageIcon("/home/pedropfo/Música/HotelRiviera/media/background_servicos.png"));
+		background.setIcon(new ImageIcon("media/background_servicos.png"));
 		background.setToolTipText("");
 		background.setLabelFor(this);
 		background.setBackground(Color.BLACK);

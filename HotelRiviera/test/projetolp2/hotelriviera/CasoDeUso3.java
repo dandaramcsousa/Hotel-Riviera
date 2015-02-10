@@ -77,8 +77,8 @@ public class CasoDeUso3 {
 		
 		Babysitter babysitter1 = new Babysitter(false, 5, dataBabysitter, horaBabysitter);
 		AluguelCarro aluguel1 = new AluguelCarro(new CarroExecutivo(false, true));
-		contrato1.adicionaAdicionais(babysitter1);
-		contrato2.adicionaAdicionais(aluguel1);
+		contrato1.adicionaServicos(babysitter1);
+		contrato2.adicionaServicos(aluguel1);
 		
 		luxoSimples = new LuxoSimples(0, NAO_TEM_CAMA_EXTRA, 0);
 		presidencial = new Presidencial(0, 0);

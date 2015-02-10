@@ -52,7 +52,7 @@ public class TelaCheckout extends JFrame {
 	public TelaCheckout() {
 		setResizable(false);
 		setTitle("Hotel Riviera - Sistema de Manuten\u00E7\u00E3o de Clientes e Servi\u00E7os - Check-out");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Pedro Paulo\\workspace\\hotelriviera\\Media\\icone_janela.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Media/icone_janela.png"));
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(Color.WHITE);
@@ -66,9 +66,9 @@ public class TelaCheckout extends JFrame {
 		
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBackground(new Color(188, 143, 143));
-		btnNewButton.setIcon(new ImageIcon("/home/pedropfo/Música/HotelRiviera/media/botao_voltaraoinicio.png"));
+		btnNewButton.setIcon(new ImageIcon("media/botao_voltaraoinicio.png"));
 		btnNewButton.setForeground(new Color(165, 42, 42));
-		btnNewButton.setSelectedIcon(new ImageIcon("C:\\Users\\Pedro Paulo\\workspace\\hotelriviera\\Media\\botao_voltaraoinicio.png"));
+		btnNewButton.setSelectedIcon(new ImageIcon("media\\botao_voltaraoinicio.png"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaInicial.main(null);
@@ -106,7 +106,7 @@ public class TelaCheckout extends JFrame {
 		contentPane.add(textField);
 		
 		button = new JButton("New button");
-		button.setIcon(new ImageIcon("C:\\Users\\Pedro Paulo\\workspace\\HotelRiviera\\Media\\botao_pesquisa.png"));
+		button.setIcon(new ImageIcon("media/botao_pesquisa.png"));
 		button.setForeground(Color.WHITE);
 		button.setBackground(Color.WHITE);
 		button.setBounds(763, 156, 60, 59);
@@ -114,7 +114,7 @@ public class TelaCheckout extends JFrame {
 		
 		JLabel background = new JLabel("Hotel Riviera");
 		background.setBounds(0, 0, 1241, 739);
-		background.setIcon(new ImageIcon("/home/pedropfo/Música/HotelRiviera/media/background_checkout.png"));
+		background.setIcon(new ImageIcon("media/background_checkout.png"));
 		background.setToolTipText("");
 		background.setLabelFor(this);
 		background.setBackground(Color.BLACK);

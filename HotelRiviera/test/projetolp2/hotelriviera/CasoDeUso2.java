@@ -103,11 +103,11 @@ public class CasoDeUso2 {
 	@Test
 	public void TestarAluguel() {
 		AluguelCarro aluguel1 = new AluguelCarro(new CarroExecutivo(false, true));
-		contrato1.adicionaAdicionais(aluguel1);
+		contrato1.adicionaServicos(aluguel1);
 		Assert.assertEquals(contrato1.getAdicionais().get(0).getValorServico(), 160.00, 0.01);
 		
 		AluguelCarro aluguel2 = new AluguelCarro(new CarroLuxo(true, false));
-		contrato2.adicionaAdicionais(aluguel2);
+		contrato2.adicionaServicos(aluguel2);
 		Assert.assertEquals(contrato2.getAdicionais().get(0).getValorServico(), 250.00, 0.01);
 	}
 	
@@ -136,11 +136,11 @@ public class CasoDeUso2 {
 		}
 		
 		Babysitter babysitter1 = new Babysitter(false, 5, dataBabysitter, horaBabysitter);
-		contrato1.adicionaAdicionais(babysitter1);
+		contrato1.adicionaServicos(babysitter1);
 		Assert.assertEquals(contrato1.getAdicionais().get(0).getValorServico(), 125.00, 0.01);
 		
 		Babysitter babysitter2 = new Babysitter(true, 5, dataBabysitter, horaBabysitter);
-		contrato2.adicionaAdicionais(babysitter2);
+		contrato2.adicionaServicos(babysitter2);
 		Assert.assertEquals(contrato2.getAdicionais().get(0).getValorServico(), 250.00, 0.01);
 	}
 	
@@ -149,14 +149,14 @@ public class CasoDeUso2 {
 		Refeicoes refeicoes1 = new Refeicoes();
 		refeicoes1.acrescentaRefeicao(64.70);
 		refeicoes1.acrescentaRefeicao(32.80);
-		contrato1.adicionaAdicionais(refeicoes1);
+		contrato1.adicionaServicos(refeicoes1);
 		Assert.assertEquals(contrato1.getAdicionais().get(0).getValorServico(), 97.50, 0.01);
 		
 		Refeicoes refeicoes2 = new Refeicoes();
 		refeicoes2.acrescentaRefeicao(90.50);
 		refeicoes2.acrescentaRefeicao(12.80);
 		refeicoes2.acrescentaRefeicao(25.30);
-		contrato2.adicionaAdicionais(refeicoes2);
+		contrato2.adicionaServicos(refeicoes2);
 		Assert.assertEquals(contrato2.getAdicionais().get(0).getValorServico(), 128.60, 0.01);
 	}
 	
@@ -164,13 +164,13 @@ public class CasoDeUso2 {
 	@Test
 	public void testaPesquisarServicos() throws Exception{
 		AluguelCarro aluguel1 = new AluguelCarro(new CarroExecutivo(false, true));
-		contrato1.adicionaAdicionais(aluguel1);
+		contrato1.adicionaServicos(aluguel1);
 		Babysitter babysitter1 = new Babysitter(false, 5, dataBabysitter, horaBabysitter);
-		contrato1.adicionaAdicionais(babysitter1);
+		contrato1.adicionaServicos(babysitter1);
 		Refeicoes refeicoes1 = new Refeicoes();
 		refeicoes1.acrescentaRefeicao(64.70);
 		refeicoes1.acrescentaRefeicao(32.80);
-		contrato1.adicionaAdicionais(refeicoes1);
+		contrato1.adicionaServicos(refeicoes1);
 		
 		ArrayList<Adicional> servicos = contrato1.getAdicionais();
 		int quantidade_servicos = servicos.size();
@@ -203,13 +203,13 @@ public class CasoDeUso2 {
 	@Test
 	public void testaRemoverServicos() throws Exception{
 		AluguelCarro aluguel1 = new AluguelCarro(new CarroExecutivo(false, true));
-		contrato1.adicionaAdicionais(aluguel1);
+		contrato1.adicionaServicos(aluguel1);
 		Babysitter babysitter1 = new Babysitter(false, 5, dataBabysitter, horaBabysitter);
-		contrato1.adicionaAdicionais(babysitter1);
+		contrato1.adicionaServicos(babysitter1);
 		Refeicoes refeicoes1 = new Refeicoes();
 		refeicoes1.acrescentaRefeicao(64.70);
 		refeicoes1.acrescentaRefeicao(32.80);
-		contrato1.adicionaAdicionais(refeicoes1);
+		contrato1.adicionaServicos(refeicoes1);
 		
 		ArrayList<Adicional> servicos = contrato1.getAdicionais();
 		int quantidade_servicos = servicos.size();
