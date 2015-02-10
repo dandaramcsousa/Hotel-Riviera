@@ -121,8 +121,7 @@ public abstract class Quarto implements ServicosHotel {
 	
 	@Override
 	public String toString () {
-		return "Código de identificação: " + getCodigoQuarto() + "\n - O quarto se encontra " + getQuartoOcupado()
-				+ " e o valor da diária é " + getValorDiaria() + " - " ;
+		return "Codigo de identificao: " + getCodigoQuarto() + "  -  O valor da diaria eh R$ " + getValorDiaria() + "0  -  " ;
 	}
 
 }

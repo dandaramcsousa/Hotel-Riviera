@@ -23,6 +23,7 @@ package projetolp2.hotelriviera;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -172,7 +173,7 @@ public class CasoDeUso2 {
 		refeicoes1.acrescentaRefeicao(32.80);
 		contrato1.adicionaServicos(refeicoes1);
 		
-		ArrayList<Adicional> servicos = contrato1.getAdicionais();
+		List<Adicional> servicos = contrato1.getAdicionais();
 		int quantidade_servicos = servicos.size();
 		String servico = "Nenhum servico.";
 		
@@ -211,7 +212,7 @@ public class CasoDeUso2 {
 		refeicoes1.acrescentaRefeicao(32.80);
 		contrato1.adicionaServicos(refeicoes1);
 		
-		ArrayList<Adicional> servicos = contrato1.getAdicionais();
+		List<Adicional> servicos = contrato1.getAdicionais();
 		int quantidade_servicos = servicos.size();
 		Assert.assertEquals(3, contrato1.getAdicionais().size(), 1);
 		for (int i=0; i <= quantidade_servicos - 1; i++){

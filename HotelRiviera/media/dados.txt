@@ -1,0 +1,31 @@
+
+403
+PP
+Rua tal
+111.835.234-32
+(83) 8124-1511
+41234-4587-8794-7891
+Codigo de identificao: 403  -  O valor da diaria eh R$ 440.00  -  
+ Tipo de quarto: Executivo Triplo
+aqui ficara a info de cama extra
+1 hospedes
+5
+----servicos----
+<fatura servicos>
+2200.0
+---------------------------------------------------------------------------------------------
+3
+Pedro Paulo
+Rua tal
+111.835.234-32
+(83) 8124-1511
+41234-4587-8794-7891
+Codigo de identificao: 3  -  O valor da diaria eh R$ 1200.00  -  
+Tipo de quarto: Presidencial
+aqui ficara a info de cama extra
+2 hospedes
+4
+----servicos----
+<fatura servicos>
+4800.0
+---------------------------------------------------------------------------------------------

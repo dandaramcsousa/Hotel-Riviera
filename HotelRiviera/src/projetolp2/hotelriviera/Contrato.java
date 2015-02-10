@@ -32,7 +32,7 @@ public class Contrato {
 		this.quarto = quarto;
 	}
 	
-	public boolean adicionaAdicionais (Adicional adicional) throws NullPointerException {
+	public boolean adicionaServicos (Adicional adicional) throws NullPointerException {
 		if (adicional == null) {
 			throw new NullPointerException();
 		}
@@ -150,5 +150,25 @@ public class Contrato {
 		}
 		Contrato contrato = (Contrato) obj;
 		return hospede.equals(contrato.getHospede()) && numeroCartao.equals(contrato.getNumeroCartao());
+	}
+
+	public void setContratoFechado() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setCodigoContrato(int codigoDeContrato) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean isContratoAberto() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Object getCodigoContrato() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

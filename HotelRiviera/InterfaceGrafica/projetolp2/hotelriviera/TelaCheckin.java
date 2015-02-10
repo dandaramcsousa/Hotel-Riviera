@@ -88,7 +88,6 @@ public class TelaCheckin extends JFrame {
 	private Quarto quartoSelecionado;
 	private static ListaQuartosHotel listaQuartos;
 	private final Map<String,Quarto> TIPO_QUARTOS = new HashMap<String,Quarto>();
-	private static ListaContratos listaContratos;
 	private final String TEXTO_PRESIDENCIAL = "\r\n - TV LCD 42''       - Ar-condicionado Split         - Home Theather\r\n\r\n"
 											+ " - Frigobar            - Sala de jogos\r\n\r\n"
 											+ " - Cofre                 - 2 Suites separadas"; 
@@ -142,7 +141,6 @@ public class TelaCheckin extends JFrame {
 		executivoDuplo = new ExecutivoDuplo(0, NAO_TEM_CAMA_EXTRA, 0);
 		luxoTriplo = new LuxoTriplo(0, 0);
 		executivoTriplo = new ExecutivoTriplo(0, 0);
-		listaContratos = new ListaContratos();
 		
 		TIPO_QUARTOS.put("Luxo Simples", luxoSimples);
 		TIPO_QUARTOS.put("Luxo Duplo", luxoDuplo);
@@ -411,7 +409,6 @@ public class TelaCheckin extends JFrame {
 					quartoSelecionado.setNumeroPessoas(Integer.parseInt(TotalDeHospedesField.getText()));
 					hospede = new Hospede(NomeField.getText(), EnderecoField.getText(), CPFField.getText(), ContatoField.getText(), new GregorianCalendar());
 					contrato = new Contrato(hospede, CartaoField.getText(), Integer.parseInt(campoNumeroDiarias.getText()), quartoSelecionado);
-					listaContratos.adicionaContrato(contrato);
 					contrato.salva();
 					MensagemPopUp popup = new MensagemPopUp("Check-in completo: Contrato efetuado com sucesso e informacoes salvas no sistema.");
 					popup.setLocation(500, 450);
