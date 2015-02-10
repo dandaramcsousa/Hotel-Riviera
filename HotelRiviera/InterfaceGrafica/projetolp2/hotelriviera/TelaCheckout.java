@@ -28,8 +28,8 @@ public class TelaCheckout extends JFrame {
 	private JTextField textField;
 	private JButton button;
 	private JTextPane txtpnTotalDaFatura;
-	private JButton btnNewButton_1;
-	private JButton btnFecharContrato;
+	private JButton botaoImprimirFatura;
+	private JButton botaoFecharContrato;
 	/**
 	 * Launch the application.
 	 */
@@ -76,21 +76,24 @@ public class TelaCheckout extends JFrame {
 			}
 		});
 		
-		btnFecharContrato = new JButton("Fechar contrato");
-		btnFecharContrato.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnFecharContrato.setBackground(Color.WHITE);
-		btnFecharContrato.setBounds(211, 519, 323, 102);
-		contentPane.add(btnFecharContrato);
+		botaoFecharContrato = new JButton("Fechar contrato");
+		botaoFecharContrato.setEnabled(false);
+		botaoFecharContrato.setFont(new Font("Tahoma", Font.BOLD, 18));
+		botaoFecharContrato.setBackground(Color.WHITE);
+		botaoFecharContrato.setBounds(211, 519, 323, 102);
+		contentPane.add(botaoFecharContrato);
 		
-		btnNewButton_1 = new JButton("Imprimir fatura");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnNewButton_1.setBackground(Color.WHITE);
-		btnNewButton_1.setBounds(211, 348, 323, 102);
-		contentPane.add(btnNewButton_1);
+		botaoImprimirFatura = new JButton("Imprimir fatura");
+		botaoImprimirFatura.setEnabled(false);
+		botaoImprimirFatura.setFont(new Font("Tahoma", Font.BOLD, 18));
+		botaoImprimirFatura.setBackground(Color.WHITE);
+		botaoImprimirFatura.setBounds(211, 348, 323, 102);
+		contentPane.add(botaoImprimirFatura);
 		
 		txtpnTotalDaFatura = new JTextPane();
+		txtpnTotalDaFatura.setForeground(Color.DARK_GRAY);
 		txtpnTotalDaFatura.setToolTipText("");
-		txtpnTotalDaFatura.setText("Total da Fatura");
+		txtpnTotalDaFatura.setText("------------------------------------------------------                       Total da Fatura");
 		txtpnTotalDaFatura.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnTotalDaFatura.setEditable(false);
 		txtpnTotalDaFatura.setBounds(677, 371, 397, 275);

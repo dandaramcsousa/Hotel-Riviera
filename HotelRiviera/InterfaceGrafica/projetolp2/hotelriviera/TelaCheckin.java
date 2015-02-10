@@ -39,6 +39,7 @@ import javax.swing.JCheckBox;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.awt.event.MouseMotionAdapter;
 
 public class TelaCheckin extends JFrame {
 
@@ -64,8 +65,8 @@ public class TelaCheckin extends JFrame {
 	private JTextField TotalDeHospedesField;
 	private JLabel lblQunatidadeDeHspedes;
 	private JLabel lblInformaespessoaisDo;
-	private JComboBox<String> selecaoQuartos;
-	private JComboBox<Quarto> quartosDisponiveis;
+	private JComboBox selecaoQuartos;
+	private JComboBox quartosDisponiveis;
 	private JComboBox comboBox;
 	
 	private Hospede hospede;
@@ -110,7 +111,7 @@ public class TelaCheckin extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("media/icone_janela.png"));
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBackground(Color.WHITE);
+		setBackground(Color.GRAY);
 		setBounds(100, 100, 1204, 766);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -128,6 +129,7 @@ public class TelaCheckin extends JFrame {
 		executivoDuplo = new ExecutivoDuplo(0, NAO_TEM_CAMA_EXTRA, 0);
 		luxoTriplo = new LuxoTriplo(0, 0);
 		executivoTriplo = new ExecutivoTriplo(0, 0);
+		listaContratos = new ListaContratos();
 		
 		TIPO_QUARTOS.put("Luxo Simples", luxoSimples);
 		TIPO_QUARTOS.put("Luxo Duplo", luxoDuplo);
@@ -161,23 +163,23 @@ public class TelaCheckin extends JFrame {
 		NomeField = new JTextField();
 		NomeField.setText("PP");
 		NomeField.setToolTipText("Nome completo do titular");
-		NomeField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		NomeField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		NomeField.setBounds(202, 160, 361, 29);
 		contentPane.add(NomeField);
 		NomeField.setColumns(10);
 		
 		EnderecoField = new JTextField();
 		EnderecoField.setText("Rua tal");
-		EnderecoField.setToolTipText("Endereço completo; Rua, Bairro, Cidade e UF");
-		EnderecoField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		EnderecoField.setToolTipText("Endereco completo; Rua, Bairro, Cidade e UF");
+		EnderecoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		EnderecoField.setColumns(10);
 		EnderecoField.setBounds(202, 200, 361, 29);
 		contentPane.add(EnderecoField);
 		
 		CPFField = new JTextField();
 		CPFField.setText("111.835.234-32");
-		CPFField.setToolTipText("CPF do responsável; Formato XXX.XXX.XXX-XX");
-		CPFField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		CPFField.setToolTipText("CPF do titular; Formato XXX.XXX.XXX-XX");
+		CPFField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		CPFField.setColumns(10);
 		CPFField.setBounds(202, 240, 361, 29);
 		contentPane.add(CPFField);
@@ -186,20 +188,20 @@ public class TelaCheckin extends JFrame {
 		ContatoField.setText("(83) 8124-1511");
 		ContatoField.setToolTipText("Telefone para contato. Formato (XX) XXXX-XXX");
 		lblNewLabel.setLabelFor(ContatoField);
-		ContatoField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		ContatoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		ContatoField.setColumns(10);
 		ContatoField.setBounds(762, 160, 361, 29);
 		contentPane.add(ContatoField);
 		
 		CartaoField = new JTextField();
 		CartaoField.setText("41234-4587-8794-7891");
-		CartaoField.setToolTipText("Número do cartão de crédito do responsável");
-		CartaoField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		CartaoField.setToolTipText("Numero do cartao de credito do titular");
+		CartaoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		CartaoField.setColumns(10);
 		CartaoField.setBounds(762, 200, 361, 29);
 		contentPane.add(CartaoField);
 		
-		lblCpf = new JLabel("Endereço");
+		lblCpf = new JLabel("Endereco");
 		lblCpf.setLabelFor(EnderecoField);
 		lblCpf.setToolTipText("Endereço Completo; Rua, Bairro, Cidade e UF");
 		lblCpf.setForeground(Color.WHITE);
@@ -223,7 +225,7 @@ public class TelaCheckin extends JFrame {
 		lblNome.setBounds(67, 160, 96, 29);
 		contentPane.add(lblNome);
 		
-		lblDataDeNascimento = new JLabel("Num. Cartão");
+		lblDataDeNascimento = new JLabel("Num. Cartao");
 		lblDataDeNascimento.setToolTipText("Número do cartão de crédito do responsável");
 		lblDataDeNascimento.setForeground(Color.WHITE);
 		lblDataDeNascimento.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -234,33 +236,33 @@ public class TelaCheckin extends JFrame {
 		DiaField.setText("01");
 		DiaField.setToolTipText("Dia");
 		DiaField.setHorizontalAlignment(SwingConstants.CENTER);
-		DiaField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		DiaField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		DiaField.setColumns(10);
 		DiaField.setBounds(887, 240, 39, 29);
 		contentPane.add(DiaField);
 		
 		MesField = new JTextField();
 		MesField.setText("11");
-		MesField.setToolTipText("Mês");
+		MesField.setToolTipText("Mes");
 		MesField.setHorizontalAlignment(SwingConstants.CENTER);
-		MesField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		MesField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		MesField.setColumns(10);
 		MesField.setBounds(976, 240, 39, 29);
 		contentPane.add(MesField);
 		
-		JLabel lblDataDeNascimento_1 = new JLabel("Data de Nascimento:  Dia        Mês        Ano");
+		JLabel lblDataDeNascimento_1 = new JLabel("Data de Nascimento:");
 		lblDataDeNascimento_1.setLabelFor(DiaField);
 		lblDataDeNascimento_1.setToolTipText("Nascimento");
 		lblDataDeNascimento_1.setForeground(Color.WHITE);
 		lblDataDeNascimento_1.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblDataDeNascimento_1.setBounds(625, 241, 446, 29);
+		lblDataDeNascimento_1.setBounds(625, 241, 209, 29);
 		contentPane.add(lblDataDeNascimento_1);
 		
 		AnoField = new JTextField();
 		AnoField.setText("1996");
 		AnoField.setToolTipText("Ano; Formato XXXX");
 		AnoField.setHorizontalAlignment(SwingConstants.CENTER);
-		AnoField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		AnoField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		AnoField.setColumns(10);
 		AnoField.setBounds(1060, 240, 63, 29);
 		contentPane.add(AnoField);
@@ -287,16 +289,17 @@ public class TelaCheckin extends JFrame {
 		TotalDeHospedesField.setFont(new Font("Dialog", Font.PLAIN, 18));
 		TotalDeHospedesField.setColumns(10);
 		
-		lblQunatidadeDeHspedes = new JLabel("Quantidade de hóspedes");
+		lblQunatidadeDeHspedes = new JLabel("Quantidade de hospedes");
 		lblQunatidadeDeHspedes.setBounds(654, 86, 255, 28);
 		panel.add(lblQunatidadeDeHspedes);
 		lblQunatidadeDeHspedes.setBackground(new Color(255, 255, 255));
-		lblQunatidadeDeHspedes.setToolTipText("Nascimento");
+		lblQunatidadeDeHspedes.setToolTipText("Total de dependentes e titular");
 		lblQunatidadeDeHspedes.setForeground(Color.BLACK);
 		lblQunatidadeDeHspedes.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblQunatidadeDeHspedes.setLabelFor(TotalDeHospedesField);
 		
-		selecaoQuartos = new JComboBox<String>();
+		selecaoQuartos = new JComboBox();
+		selecaoQuartos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		selecaoQuartos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {				
 				System.out.println(selecaoQuartos.getSelectedItem());
@@ -329,7 +332,7 @@ public class TelaCheckin extends JFrame {
 		panel.add(selecaoQuartos);
 		selecaoQuartos.setForeground(Color.DARK_GRAY);
 		selecaoQuartos.setToolTipText("Escolher tipo de quarto");
-		selecaoQuartos.addItem("- - - - - - - - - - - - - - - ");
+		selecaoQuartos.addItem("- - - - - - - - - - - - - - - - - - ");
 		selecaoQuartos.addItem("Executivo Simples");
 		selecaoQuartos.addItem("Executivo Duplo");
 		selecaoQuartos.addItem("Executivo Triplo");
@@ -340,6 +343,9 @@ public class TelaCheckin extends JFrame {
 		selecaoQuartos.setBackground(Color.WHITE);
 		
 		quartosDisponiveis = new JComboBox();
+		quartosDisponiveis.setEnabled(false);
+		quartosDisponiveis.setForeground(Color.BLACK);
+		quartosDisponiveis.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		quartosDisponiveis.setBackground(Color.WHITE);
 		quartosDisponiveis.setBounds(12, 49, 897, 24);
 		panel.add(quartosDisponiveis);
@@ -351,13 +357,17 @@ public class TelaCheckin extends JFrame {
 		});
 		
 		
-		lblInformaespessoaisDo = new JLabel("Informações Pessoais do Hóspede");
+		lblInformaespessoaisDo = new JLabel("Informacoes Pessoais do Hospede");
 		lblInformaespessoaisDo.setToolTipText("Digite as informações pedidas");
 		lblInformaespessoaisDo.setForeground(Color.WHITE);
 		lblInformaespessoaisDo.setFont(new Font("DejaVu Sans", Font.BOLD, 16));
 		lblInformaespessoaisDo.setBounds(55, 119, 420, 29);
 		contentPane.add(lblInformaespessoaisDo);
 		JButton btnSalvarInformaes = new JButton("Efetuar Cadastro");
+		btnSalvarInformaes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnSalvarInformaes.setForeground(new Color(240, 128, 128));
 		btnSalvarInformaes.setBackground(UIManager.getColor("Button.light"));
 		btnSalvarInformaes.addMouseListener(new MouseAdapter() {
@@ -365,13 +375,24 @@ public class TelaCheckin extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				try {
 					hospede = new Hospede(NomeField.getText(), EnderecoField.getText(), CPFField.getText(), ContatoField.getText(), new GregorianCalendar());
-					contrato = new Contrato(hospede, ContatoField.getText(), 4, quartoSelecionado);
+					contrato = new Contrato(hospede, CartaoField.getText(), 7, quartoSelecionado);
+					quartoSelecionado.ocupado();
 					listaContratos.adicionaContrato(contrato);
+					contrato.salva();
+					MensagemPopUp popup = new MensagemPopUp("Check-in completo: Contrato efetuado com sucesso e informacoes salvas no sistema.");
+					popup.setLocation(500, 450);
+					popup.setVisible(true);
+					popup.setAlwaysOnTop(true);
+					TelaInicial.main(null);
+					setVisible(false);
 				} catch (Exception e1) {
+					MensagemPopUp popup = new MensagemPopUp("Informacoes em falta ou incorretas.");
+					popup.setLocation(500, 450);
+					popup.setVisible(true);
 					System.err.println(e1.getMessage());
+					e1.printStackTrace();
 				}
-				TelaInicial.main(null);
-				setVisible(false);
+			
 				System.out.println(hospede);
 			}
 		});
@@ -385,12 +406,40 @@ public class TelaCheckin extends JFrame {
 		lblSeleoDoTipo.setBounds(55, 305, 420, 29);
 		contentPane.add(lblSeleoDoTipo);
 		
+		JLabel lblDiac = new JLabel("Dia");
+		lblDiac.setToolTipText("Nascimento");
+		lblDiac.setForeground(Color.WHITE);
+		lblDiac.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblDiac.setBounds(841, 240, 48, 29);
+		contentPane.add(lblDiac);
+		
+		JLabel lblMes = new JLabel("Mes");
+		lblMes.setToolTipText("Nascimento");
+		lblMes.setForeground(Color.WHITE);
+		lblMes.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblMes.setBounds(930, 239, 48, 29);
+		contentPane.add(lblMes);
+		
+		JLabel lblAno = new JLabel("Ano");
+		lblAno.setToolTipText("Nascimento");
+		lblAno.setForeground(Color.WHITE);
+		lblAno.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblAno.setBounds(1018, 239, 48, 29);
+		contentPane.add(lblAno);
+		
 		JLabel background = new JLabel("Hotel Riviera");
-		background.setBounds(77, 11, 1241, 739);
+		background.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				if (selecaoQuartos.getSelectedItem().equals("- - - - - - - - - - - - - - - - - - ")) quartosDisponiveis.setEnabled(false);
+				else quartosDisponiveis.setEnabled(true);
+			}
+		});
+		background.setBounds(0, 0, 1241, 739);
 		background.setIcon(new ImageIcon("media/background_checkin.png"));
 		background.setToolTipText("");
 		background.setLabelFor(this);
-		background.setBackground(Color.BLACK);
+		background.setBackground(new Color(0, 0, 0));
 		contentPane.add(background);
 	
 	}

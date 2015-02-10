@@ -2,11 +2,21 @@ package projetolp2.hotelriviera;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+/**
+ * Classe que cria, acessa e modifica uma lista com todos os quartos do Hotel Riviera.
+ * @author Dandara Maria, Paulo Vinicius, Pedro Paulo.
+ *
+ */
 public class ListaQuartosHotel {
-	private ArrayList<Quarto> quartosHotel;
-	private ArrayList<Quarto> quartosDisponiveis;
+	private List<Quarto> quartosHotel;
+	private List<Quarto> quartosDisponiveis;
 	
+	 /**
+	  * Construtor da classe. Assim que instanciado cria um ArrayList com todos os quartos do Hotel, incluindo seus codigos.
+	  * @throws Exception Excecao herdada da classe quartos.
+	  */
 	public ListaQuartosHotel() throws Exception {
 		quartosHotel = new ArrayList<Quarto>();
 		int codPresidencial = 1; 
@@ -48,12 +58,22 @@ public class ListaQuartosHotel {
 		
 	}
 	
-	public ArrayList<Quarto> getQuartosDisponiveis () {
+	/**
+	 * Metodo para acessar o quartos disponiveis do Hotel.
+	 * @return O quartos que estao disponiveis no momento.
+	 */
+	public List<Quarto> getQuartosDisponiveis () {
 		atualizaQuartosDisponiveis();
 		return quartosDisponiveis;
 	}
-	
-	public ArrayList<Quarto> getQuartosDisponiveis (Quarto quarto) throws Exception {
+
+	/**
+	 * Metodo para acessar os quartos disponiveis passando por parametro um tipo de quarto.
+	 * @param quarto O tipo de quarto a ser pesquisado.
+	 * @return Os quartos do tipo passado por parametro que estao disponiveis.
+	 * @throws Exception Excecao lancada caso o parametro seja null.
+	 */
+	public List<Quarto> getQuartosDisponiveis (Quarto quarto) throws Exception {
 		if (quarto == null) throw new ObjetoInvalidoException("Parametro de entrada incorreto.");
 		String tipoQuarto = checaTipoQuarto(quarto);
 		atualizaQuartosDisponiveis();
@@ -67,6 +87,11 @@ public class ListaQuartosHotel {
 		return quartosDisponiveis;
 	}
 
+	/**
+	 * Metodo que muda o status do quarto.
+	 * @param codigoQuarto O quarto a ser acessado.
+	 * @return True se o quarto foi modificado para livre e false caso contrario.
+	 */
 	public boolean SetQuartoLivre (int codigoQuarto) {
 		Quarto quarto = getQuarto(codigoQuarto);
 		if (quarto == null) return false;
@@ -74,6 +99,11 @@ public class ListaQuartosHotel {
 		return true;
 	}
 	
+	/**
+	 * Metodo que acessa o quarto.
+	 * @param codigoQuarto O codigo do quarto a ser acessado.
+	 * @return O quarto caso ele exista e null caso contrario.
+	 */
 	public Quarto getQuarto (int codigoQuarto) {
 		for (Quarto a: quartosHotel) {
 			if (a.getCodigoQuarto() == codigoQuarto) return a;
@@ -81,6 +111,13 @@ public class ListaQuartosHotel {
 		return null;
 	}
 	
+	/**
+	 * Metodo que reserva um determinado quarto.
+	 * @param numeroPessoas A quantidade de pessoas a estar no quarto.
+	 * @param codigoQuarto O codigo do quarto a ser reservado.
+	 * @return True caso o quarto seja reservado e false caso contrario.
+	 * @throws Exception herdada do setNumeroPessoas.
+	 */
 	public boolean reservaQuarto (int numeroPessoas, int codigoQuarto) throws Exception {
 		for (Quarto a: quartosHotel) {
 			if (codigoQuarto == a.getCodigoQuarto() && a.getQuartoOcupado() == false) {
@@ -92,6 +129,9 @@ public class ListaQuartosHotel {
 		return false;
 	}
 
+	/**
+	 * Metodo que atualiza a lista de quartos disponiveis.
+	 */
 	private void atualizaQuartosDisponiveis () {
 		quartosDisponiveis = new ArrayList<Quarto>();
 		for (Quarto a: quartosHotel) {
@@ -101,6 +141,11 @@ public class ListaQuartosHotel {
 		}
 	}
 	
+	/**
+	 * Metodo que checa o tipo de um quarto.
+	 * @param quarto Quarto a ter tipo checado.
+	 * @return O tipo do quarto.
+	 */
 	private String checaTipoQuarto (Quarto quarto) {
 		return quarto.getTipoQuarto();
 	}

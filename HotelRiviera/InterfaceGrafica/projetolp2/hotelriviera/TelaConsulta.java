@@ -5,17 +5,25 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 import java.awt.Toolkit;
+
 import javax.swing.JTextField;
+
 import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
+
 import javax.swing.SwingConstants;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 
@@ -28,6 +36,9 @@ public class TelaConsulta extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
+	private JTextPane informacoesHospedeServicos;
+	JTextPane informacoesQuarto;
+	private boolean encontrou = false;
 	/**
 	 * Launch the application.
 	 */
@@ -50,7 +61,7 @@ public class TelaConsulta extends JFrame {
 	public TelaConsulta() {
 		setResizable(false);
 		setTitle("Hotel Riviera - Sistema de Manutencao de Clientes e Servicos - Consulta");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Pedro Paulo\\workspace\\hotelriviera\\Media\\icone_janela.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("media/icone_janela.png"));
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(Color.WHITE);
@@ -66,7 +77,7 @@ public class TelaConsulta extends JFrame {
 		btnNewButton.setBackground(new Color(188, 143, 143));
 		btnNewButton.setIcon(new ImageIcon("media/botao_voltaraoinicio.png"));
 		btnNewButton.setForeground(new Color(165, 42, 42));
-		btnNewButton.setSelectedIcon(new ImageIcon("C:\\Users\\Pedro Paulo\\workspace\\hotelriviera\\Media\\botao_voltaraoinicio.png"));
+		btnNewButton.setSelectedIcon(new ImageIcon("media/botao_voltaraoinicio.png"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaInicial.main(null);
@@ -75,12 +86,13 @@ public class TelaConsulta extends JFrame {
 		});
 		
 		JButton btnNewButton_2 = new JButton("Remover servi\u00E7o");
+		btnNewButton_2.setEnabled(false);
 		btnNewButton_2.setToolTipText("Remover o servico selecionado");
 		btnNewButton_2.setBackground(Color.WHITE);
 		btnNewButton_2.setBounds(841, 315, 279, 29);
 		contentPane.add(btnNewButton_2);
 		
-		JTextPane informacoesQuarto = new JTextPane();
+		informacoesQuarto = new JTextPane();
 		informacoesQuarto.setEditable(false);
 		informacoesQuarto.setText("toString do quarto");
 		informacoesQuarto.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -102,14 +114,40 @@ public class TelaConsulta extends JFrame {
 		textField.setBounds(678, 168, 60, 38);
 		contentPane.add(textField);
 		
-		JTextPane informacoesHospedeServicos = new JTextPane();
+		informacoesHospedeServicos = new JTextPane();
 		informacoesHospedeServicos.setEditable(false);
 		informacoesHospedeServicos.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		informacoesHospedeServicos.setText("toString do hospede e dos servi\u00E7os ");
 		informacoesHospedeServicos.setBounds(449, 301, 348, 306);
 		contentPane.add(informacoesHospedeServicos);
 		
 		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Scanner dadosCliente = new Scanner(new FileReader("media/dados.txt")).useDelimiter("\\n");
+					while (dadosCliente.hasNext()) {
+						if (dadosCliente.next().equals(textField.getText())) {
+							String textoFormatado = "";
+							for (int i =0; i < 6; i++) {
+								textoFormatado += dadosCliente.next() + "\n";
+							}
+							informacoesHospedeServicos.setText(textoFormatado);
+							encontrou = true;
+							dadosCliente.next();
+							String textoString = "";
+							for (int i = 0; i < 2; i++) {
+								textoString += dadosCliente.next();
+							}
+							informacoesQuarto.setText(textoString);
+						}
+					}
+					if (!dadosCliente.hasNext() && !encontrou) informacoesHospedeServicos.setText("Hospede não encontrado.");
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(Color.WHITE);
 		btnNewButton_1.setIcon(new ImageIcon("media/botao_pesquisa.png"));
@@ -127,7 +165,8 @@ public class TelaConsulta extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaEditarDados telaEdicao = new TelaEditarDados();
 				telaEdicao.setVisible(true);
-				telaEdicao.move(950, 450);
+				telaEdicao.setLocation(950, 450);
+				//telaEdicao.setLocation(950, 450);
 			}
 		});
 		btnModificarDados.setBackground(Color.WHITE);

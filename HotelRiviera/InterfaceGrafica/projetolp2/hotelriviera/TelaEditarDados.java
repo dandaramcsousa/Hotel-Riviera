@@ -1,6 +1,5 @@
 package projetolp2.hotelriviera;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,13 +8,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JButton;
-import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class TelaEditarDados extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -26,6 +30,7 @@ public class TelaEditarDados extends JFrame {
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JButton botaoAtualizar;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -47,8 +52,10 @@ public class TelaEditarDados extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaEditarDados() {
+		setTitle("Editar informacoes do cliente");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("media/icone_janela.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 548, 417);
+		setBounds(100, 100, 548, 429);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -67,15 +74,15 @@ public class TelaEditarDados extends JFrame {
 		label.setBounds(12, 92, 96, 29);
 		panel.add(label);
 		
-		JLabel label_1 = new JLabel("Endereço");
-		label_1.setToolTipText("Endereço Completo; Rua, Bairro, Cidade e UF");
+		JLabel label_1 = new JLabel("Endereco");
+		label_1.setToolTipText("Endereco Completo; Rua, Bairro, Cidade e UF");
 		label_1.setForeground(Color.WHITE);
 		label_1.setFont(new Font("Dialog", Font.BOLD, 18));
 		label_1.setBounds(12, 132, 96, 29);
 		panel.add(label_1);
 		
 		JLabel label_2 = new JLabel("CPF");
-		label_2.setToolTipText("CPF do responsável");
+		label_2.setToolTipText("CPF do responsavel");
 		label_2.setForeground(Color.WHITE);
 		label_2.setFont(new Font("Dialog", Font.BOLD, 18));
 		label_2.setBounds(12, 172, 96, 29);
@@ -90,7 +97,7 @@ public class TelaEditarDados extends JFrame {
 		panel.add(textField);
 		
 		textField_1 = new JTextField();
-		textField_1.setToolTipText("Endereço completo; Rua, Bairro, Cidade e UF");
+		textField_1.setToolTipText("Endereco completo; Rua, Bairro, Cidade e UF");
 		textField_1.setText("Rua tal");
 		textField_1.setFont(new Font("Dialog", Font.PLAIN, 18));
 		textField_1.setColumns(10);
@@ -120,15 +127,15 @@ public class TelaEditarDados extends JFrame {
 		label_3.setBounds(12, 213, 158, 29);
 		panel.add(label_3);
 		
-		JLabel label_4 = new JLabel("Num. Cartão");
-		label_4.setToolTipText("Número do cartão de crédito do responsável");
-		label_4.setForeground(Color.WHITE);
-		label_4.setFont(new Font("Dialog", Font.BOLD, 18));
-		label_4.setBounds(12, 254, 138, 29);
-		panel.add(label_4);
+		JLabel lblNumCartao = new JLabel("Num. Cartao");
+		lblNumCartao.setToolTipText("Numero do cartao de credito do responsavel");
+		lblNumCartao.setForeground(Color.WHITE);
+		lblNumCartao.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblNumCartao.setBounds(12, 254, 138, 29);
+		panel.add(lblNumCartao);
 		
 		textField_4 = new JTextField();
-		textField_4.setToolTipText("Mês");
+		textField_4.setToolTipText("Mes");
 		textField_4.setText("11");
 		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_4.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -154,7 +161,7 @@ public class TelaEditarDados extends JFrame {
 		textField_6.setBounds(274, 293, 39, 29);
 		panel.add(textField_6);
 		
-		JLabel label_5 = new JLabel("Data de Nascimento:  Dia        Mês        Ano");
+		JLabel label_5 = new JLabel("Data de Nascimento:       Dia             Mes          Ano");
 		label_5.setToolTipText("Nascimento");
 		label_5.setForeground(Color.WHITE);
 		label_5.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -170,7 +177,15 @@ public class TelaEditarDados extends JFrame {
 		panel.add(textField_7);
 		
 		botaoAtualizar = new JButton("Atualizar dados");
+		botaoAtualizar.setBackground(Color.WHITE);
 		botaoAtualizar.setBounds(147, 334, 260, 47);
 		panel.add(botaoAtualizar);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon("media/backgrond_popupedicao.png"));
+		lblNewLabel.setBounds(0, 0, 548, 411);
+		panel.add(lblNewLabel);
 	}
 }

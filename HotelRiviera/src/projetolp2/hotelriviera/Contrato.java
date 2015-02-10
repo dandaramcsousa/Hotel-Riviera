@@ -1,6 +1,11 @@
 package projetolp2.hotelriviera;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
+
 /**
  * Classe que cria, acessa e modifica um contrato de um hospede titular no Hotel Riviera.
  * @author Dandara Maria, Paulo Vinicius, Pedro Paulo
@@ -167,13 +172,57 @@ public class Contrato {
 	}
 	
 	/**
-	 * Medo que muda o codigo do contrato.
+	 * Metodo que muda o codigo do contrato.
 	 * @param codigoContrato Novo codigo ao contrato.
 	 * @return O novo codigo.
 	 */
 	public int setCodigoContrato (int codigoContrato) {
 		this.codigoContrato = codigoContrato;
 		return this.codigoContrato;
+	}
+	
+	/**
+	 * Metodo que salva o contrato em um arquivo txt.
+	 */
+	public void salva(){
+		File dados = new File("media/dados.txt");//arquivo no local do projeto
+	        try {
+	            if (dados.exists() == false) {
+	                //se n�o houver esse arquivo ele cria um
+	                dados.createNewFile();
+	            }
+	
+	            File[] arquivos = dados.listFiles(); //array para guardar as linhas do arquivo
+	
+	
+	            FileWriter fw = new FileWriter(dados, true);
+	            BufferedWriter bw = new BufferedWriter(fw);
+	            
+	            bw.newLine();
+	            bw.write("" + this.quarto.getCodigoQuarto());
+	            bw.newLine();
+	            bw.write(this.hospede.getNomeHospede());
+	            bw.newLine();
+	            bw.write(this.hospede.getEndereco());
+	            bw.newLine();
+	            bw.write(this.hospede.getCPF());
+	            bw.newLine();
+	            bw.write(this.hospede.getTelefoneContato());
+	            bw.newLine();
+	            bw.write(numeroCartao);
+	            bw.newLine();
+	            bw.write("" + numeroDias);
+	            bw.newLine();
+	            bw.write(quarto.toString());
+	            bw.write("----");
+	            
+	            bw.close();
+	            fw.close();
+	            
+	        } catch (IOException ex) {
+	        	System.out.println("bugou");
+	            ex.printStackTrace();
+	        }
 	}
 	
 	@Override
