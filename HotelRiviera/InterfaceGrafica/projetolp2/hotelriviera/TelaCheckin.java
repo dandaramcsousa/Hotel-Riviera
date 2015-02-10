@@ -41,6 +41,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.awt.event.MouseMotionAdapter;
 
+import javax.swing.JTextPane;
+
+import java.awt.SystemColor;
+
 public class TelaCheckin extends JFrame {
 
 	/**
@@ -65,10 +69,12 @@ public class TelaCheckin extends JFrame {
 	private JTextField TotalDeHospedesField;
 	private JLabel lblQunatidadeDeHspedes;
 	private JLabel lblInformaespessoaisDo;
+	private JLabel totalFatura;
 	private JComboBox selecaoQuartos;
 	private JComboBox quartosDisponiveis;
 	private JComboBox comboBox;
-	
+	private JTextPane painelEpecificacoes;
+	private JLabel lblEsteQuartoOferece;
 	private Hospede hospede;
 	private Contrato contrato;
 	private final boolean NAO_TEM_CAMA_EXTRA = false;
@@ -83,8 +89,15 @@ public class TelaCheckin extends JFrame {
 	private static ListaQuartosHotel listaQuartos;
 	private final Map<String,Quarto> TIPO_QUARTOS = new HashMap<String,Quarto>();
 	private static ListaContratos listaContratos;
-	
-	
+	private final String TEXTO_PRESIDENCIAL = "\r\n - TV LCD 42''       - Ar-condicionado Split         - Home Theather\r\n\r\n"
+											+ " - Frigobar            - Sala de jogos\r\n\r\n"
+											+ " - Cofre                 - 2 Suites separadas"; 
+	private final String TEXTO_LUXO = "\r\n - TV LCD 42''       - Ar-condicionado Split\r\n\r\n"
+			+ " - Frigobar            - Home Theaters\r\n\r\n"
+			+ " - Cofre";
+	private final String TEXTO_EXECUTIVO = "\r\n - TV LCD 42''       - Ar-condicionado Split\r\n\r\n - Frigobar\r\n\r\n - Cofre";
+	private JTextField campoNumeroDiarias;
+
 	/**
 	 * Launch the application.
 	 */
@@ -150,6 +163,32 @@ public class TelaCheckin extends JFrame {
 				setVisible(false);
 			}
 		});
+		
+		campoNumeroDiarias = new JTextField();
+		campoNumeroDiarias.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				try {
+					if (!campoNumeroDiarias.getText().isEmpty() && !selecaoQuartos.getSelectedItem().equals("- - - - - - - - - - - - - - - - - - ")){
+						double total = quartoSelecionado.getValorDiaria() * Integer.parseInt(campoNumeroDiarias.getText());
+						totalFatura.setText("R$ " + total +"0");
+					}
+				} catch (Exception e) {
+				}	
+			}
+		});
+		campoNumeroDiarias.setHorizontalAlignment(SwingConstants.CENTER);
+		campoNumeroDiarias.setFont(new Font("Tahoma", Font.BOLD, 20));
+		campoNumeroDiarias.setColumns(10);
+		campoNumeroDiarias.setBounds(545, 652, 60, 38);
+		contentPane.add(campoNumeroDiarias);
+		
+		lblEsteQuartoOferece = new JLabel("Este quarto oferece:");
+		lblEsteQuartoOferece.setToolTipText("Especificacoes do quarto");
+		lblEsteQuartoOferece.setForeground(Color.WHITE);
+		lblEsteQuartoOferece.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblEsteQuartoOferece.setBounds(55, 457, 420, 29);
+		contentPane.add(lblEsteQuartoOferece);
 		
 		lblNewLabel = new JLabel("Tel. Contato");
 		lblNewLabel.setToolTipText("Telefone para contato. Formato (XX) XXXX-XXX");
@@ -269,7 +308,7 @@ public class TelaCheckin extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(202, 340, 921, 133);
+		panel.setBounds(202, 315, 921, 133);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -302,11 +341,8 @@ public class TelaCheckin extends JFrame {
 		selecaoQuartos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		selecaoQuartos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {				
-				System.out.println(selecaoQuartos.getSelectedItem());
 				String tipo = (String) selecaoQuartos.getSelectedItem();
 				Quarto selecao = TIPO_QUARTOS.get(tipo);
-				System.out.println(selecao);
-				System.out.println("------------");
 				try {
 					quartosDisponiveis.removeAllItems();
 					for (Quarto a : listaQuartos.getQuartosDisponiveis(selecao)) {
@@ -315,7 +351,7 @@ public class TelaCheckin extends JFrame {
 				} catch (Exception e) {
 				}
 				
-				if (tipo.equals("Luxo Triplo") || tipo.equals("Executivo Triplo")){
+				if (tipo.equals("Luxo Triplo") || tipo.equals("Executivo Triplo") || tipo.equals("Presidencial")){
 					botaoCamaExtra.setEnabled(false);
 					botaoCamaExtra.setSelected(false);
 				}
@@ -357,26 +393,24 @@ public class TelaCheckin extends JFrame {
 		});
 		
 		
-		lblInformaespessoaisDo = new JLabel("Informacoes Pessoais do Hospede");
+		lblInformaespessoaisDo = new JLabel("Informacoes Pessoais do Hospede:");
 		lblInformaespessoaisDo.setToolTipText("Digite as informações pedidas");
 		lblInformaespessoaisDo.setForeground(Color.WHITE);
 		lblInformaespessoaisDo.setFont(new Font("DejaVu Sans", Font.BOLD, 16));
 		lblInformaespessoaisDo.setBounds(55, 119, 420, 29);
 		contentPane.add(lblInformaespessoaisDo);
 		JButton btnSalvarInformaes = new JButton("Efetuar Cadastro");
-		btnSalvarInformaes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnSalvarInformaes.setForeground(new Color(240, 128, 128));
-		btnSalvarInformaes.setBackground(UIManager.getColor("Button.light"));
+		btnSalvarInformaes.setIcon(new ImageIcon("C:\\Users\\Pedro Paulo\\Documents\\HotelRiviera\\media\\botao_finalizarcadastro.png"));
+		btnSalvarInformaes.setSelectedIcon(new ImageIcon("C:\\Users\\Pedro Paulo\\Documents\\HotelRiviera\\media\\botao_finalizarcadastro.png"));
+		btnSalvarInformaes.setForeground(new Color(253, 245, 230));
+		btnSalvarInformaes.setBackground(Color.WHITE);
 		btnSalvarInformaes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
+					quartoSelecionado.setNumeroPessoas(Integer.parseInt(TotalDeHospedesField.getText()));
 					hospede = new Hospede(NomeField.getText(), EnderecoField.getText(), CPFField.getText(), ContatoField.getText(), new GregorianCalendar());
-					contrato = new Contrato(hospede, CartaoField.getText(), 7, quartoSelecionado);
-					quartoSelecionado.ocupado();
+					contrato = new Contrato(hospede, CartaoField.getText(), Integer.parseInt(campoNumeroDiarias.getText()), quartoSelecionado);
 					listaContratos.adicionaContrato(contrato);
 					contrato.salva();
 					MensagemPopUp popup = new MensagemPopUp("Check-in completo: Contrato efetuado com sucesso e informacoes salvas no sistema.");
@@ -389,21 +423,18 @@ public class TelaCheckin extends JFrame {
 					MensagemPopUp popup = new MensagemPopUp("Informacoes em falta ou incorretas.");
 					popup.setLocation(500, 450);
 					popup.setVisible(true);
-					System.err.println(e1.getMessage());
-					e1.printStackTrace();
+					//System.err.println(e1.getMessage());
 				}
-			
-				System.out.println(hospede);
 			}
 		});
-		btnSalvarInformaes.setBounds(422, 607, 361, 74);
+		btnSalvarInformaes.setBounds(741, 631, 380, 76);
 		contentPane.add(btnSalvarInformaes);	
 		
 		JLabel lblSeleoDoTipo = new JLabel("Selecione o tipo de quarto:");
 		lblSeleoDoTipo.setToolTipText("Selecione abaixo o quarto desejado");
 		lblSeleoDoTipo.setForeground(Color.WHITE);
 		lblSeleoDoTipo.setFont(new Font("DejaVu Sans", Font.BOLD, 16));
-		lblSeleoDoTipo.setBounds(55, 305, 420, 29);
+		lblSeleoDoTipo.setBounds(55, 280, 420, 29);
 		contentPane.add(lblSeleoDoTipo);
 		
 		JLabel lblDiac = new JLabel("Dia");
@@ -427,16 +458,55 @@ public class TelaCheckin extends JFrame {
 		lblAno.setBounds(1018, 239, 48, 29);
 		contentPane.add(lblAno);
 		
+		painelEpecificacoes = new JTextPane();
+		painelEpecificacoes.setForeground(Color.DARK_GRAY);
+		painelEpecificacoes.setFont(new Font("Tahoma", Font.BOLD, 14));
+		painelEpecificacoes.setEditable(false);
+		painelEpecificacoes.setBackground(new Color(255, 255, 153));
+		painelEpecificacoes.setText("\r\n - TV LCD 42''           - Ar-condicionado Split\r\n\r\n - Frigobar\r\n\r\n - Cofre");
+		painelEpecificacoes.setBounds(202, 492, 921, 120);
+		contentPane.add(painelEpecificacoes);
+		lblEsteQuartoOferece.setVisible(false);
+		painelEpecificacoes.setVisible(false);
+		
+		totalFatura = new JLabel("R$ ");
+		totalFatura.setForeground(new Color(139, 0, 0));
+		totalFatura.setFont(new Font("Tahoma", Font.BOLD, 14));
+		totalFatura.setBounds(622, 653, 96, 38);
+		contentPane.add(totalFatura);
+		
+		
 		JLabel background = new JLabel("Hotel Riviera");
 		background.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent arg0) {
-				if (selecaoQuartos.getSelectedItem().equals("- - - - - - - - - - - - - - - - - - ")) quartosDisponiveis.setEnabled(false);
-				else quartosDisponiveis.setEnabled(true);
+				if (selecaoQuartos.getSelectedItem().equals("- - - - - - - - - - - - - - - - - - ")){
+					quartosDisponiveis.setEnabled(false);
+					lblEsteQuartoOferece.setVisible(false);
+					painelEpecificacoes.setVisible(false);
+				}
+				else{
+					quartosDisponiveis.setEnabled(true);
+					lblEsteQuartoOferece.setVisible(true);
+					painelEpecificacoes.setVisible(true);try {
+						if (!campoNumeroDiarias.getText().isEmpty()){
+							double total = quartoSelecionado.getValorDiaria() * Integer.parseInt(campoNumeroDiarias.getText());
+							totalFatura.setText("R$ " + total +"0");
+						}
+					} catch (Exception e) {
+					}		
+				}
+				if (selecaoQuartos.getSelectedItem().equals("Presidencial")) painelEpecificacoes.setText(TEXTO_PRESIDENCIAL);
+				else if (selecaoQuartos.getSelectedItem().equals("Luxo Simples") ||
+						 selecaoQuartos.getSelectedItem().equals("Luxo Duplo")   ||
+						 selecaoQuartos.getSelectedItem().equals("Luxo Triplo")) painelEpecificacoes.setText(TEXTO_LUXO);
+				else if (selecaoQuartos.getSelectedItem().equals("Executivo Simples") ||
+						 selecaoQuartos.getSelectedItem().equals("Executivo Duplo")   ||
+						 selecaoQuartos.getSelectedItem().equals("Executivo Triplo")) painelEpecificacoes.setText(TEXTO_EXECUTIVO);
 			}
 		});
 		background.setBounds(0, 0, 1241, 739);
-		background.setIcon(new ImageIcon("media/background_checkin.png"));
+		background.setIcon(new ImageIcon("C:\\Users\\Pedro Paulo\\Documents\\HotelRiviera\\media\\background_checkin.png"));
 		background.setToolTipText("");
 		background.setLabelFor(this);
 		background.setBackground(new Color(0, 0, 0));
